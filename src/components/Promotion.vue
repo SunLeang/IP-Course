@@ -1,22 +1,20 @@
 <template>
     <div :style="{backgroundColor: bgcolor}" class="promotion">
-        <div class = "Banners">
+        <div class="Banners">
             <h2>{{ title }}</h2>
-            <buttons :bgBtncolor="bgBtncolor" :label = "label"/>
+            <buttons :bgBtncolor="bgBtncolor" :label="label" @click="HandleClick" />
+        </div>
+        <div class="banner-img">
+            <img :src="imgSrc" :alt="title" class="banner-image">
+        </div>
     </div>
-    <div class="banner-img">
-        <img :src="imgSrc" :alt="title" class="banner-image">
-    </div>
-</div>
 </template>
-
-
 
 <script>
 import Buttons from './Buttons.vue';
 
     export default {
-        components:{
+        components: {
             Buttons
         },
 
@@ -29,8 +27,8 @@ import Buttons from './Buttons.vue';
         },
 
         methods: {
-        HandleClick() {
-            alert("Enjoy Shopping!!")
+            HandleClick() {
+                alert("Let's shop: " + this.title);
             }
         },
     };
@@ -72,17 +70,16 @@ import Buttons from './Buttons.vue';
 }
 
 button {
-    width: 50%;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    justify-items: center;
-    padding: 8px 16px;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-
-}
+        width: 55%;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        justify-content: center;
+        padding: 8px 16px;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
 
 </style>

@@ -13,18 +13,18 @@ export default {
         label: String,
     },
 
-    methods: {
-        HandleClick() {
-            alert("Enjoy Shopping!!")
-        }
-    },
+    // methods: {
+    //     HandleClick() {
+    //         alert("")
+    //     }
+    // },
 
 };
 
 </script>
 
-<style scoped>
-    button {
+<!-- <style scoped>
+    /* button {
         width: 50%;
         display: flex;
         align-items: center;
@@ -35,5 +35,5 @@ export default {
         border: none;
         border-radius: 4px;
         cursor: pointer;
-    }
-</style>
+    } */
+</style> -->
