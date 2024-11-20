@@ -3,17 +3,17 @@
         <Category
         v-for = "(product, index) in products"
             :key = "index"
-            :title = 'product.title'
-            :items = "product.items"
-            :imgSrc = "product.imgSrc"
-            :bgcolor = "product.bgcolor"
+            :name = 'product.name'
+            :productCount = "product.productCount"
+            :image = "product.image"
+            :color = "product.color"
         />
 
     </div>
 </template>
 
 <script>
-
+import axios from "axios";
 import Category from '@/components/Category.vue';
 
     export default {
@@ -23,71 +23,27 @@ import Category from '@/components/Category.vue';
 
         data () {
             return {
-                products: [
-                    {
-                        title: "Burger",
-                        items: 14,
-                        imgSrc: "./images/categories/burger.png",
-                        bgcolor: "#f2fce4",
-                    },
-                    {
-                        title: "Peach",
-                        items: 17,
-                        imgSrc: "./images/categories/peach.png",
-                        bgcolor: "#FFFCEB",
-                    },
-                    {
-                        title: "Organic Kiwi",
-                        items: 21,
-                        imgSrc: "./images/categories/kiwi.png",
-                        bgcolor: "#ecffec",
-                    },
-                    {
-                        title: "Red Apple",
-                        items: 25,
-                        imgSrc: "./images/categories/apple.png",
-                        bgcolor: "#feeefa",
-                    },
-                    {
-                        title: "Snack",
-                        items: 34,
-                        imgSrc: "./images/categories/snack.png",
-                        bgcolor: "fff3eb",
-                    },
-                    {
-                        title: "Black Plum",
-                        items: 63,
-                        imgSrc: "./images/categories/blackplum.png",
-                        bgcolor: "#fff3ff",
-                    },
-                    {
-                        title: "Vegetable",
-                        items: 53,
-                        imgSrc: "./images/categories/vegetables.png",
-                        bgcolor: "#f2fce4",
-                    },
-                    {
-                        title: "Headphone",
-                        items: 25,
-                        imgSrc: "./images/categories/headphone.png",
-                        bgcolor: "#fffceb",
-                    },
-                    {
-                        title: "Cake and Milk",
-                        items: 53,
-                        imgSrc: "./images/categories/cake&milk.png",
-                        bgcolor: "#f2fce4",
-                    },
-                    {
-                        title: "Orage",
-                        items: 63,
-                        imgSrc: "./images/categories/orange.png",
-                        bgcolor: "#fff3ff",
-                    },
-                ]
-            }
-        }
-    };
+                products: [],
+            };
+        },
+        methods: {
+            fetchProducts() {
+        axios
+        .get("http://localhost:3000/api/categories")
+        .then((response) => {
+          console.log(response.data); // Access the data
+
+            this.products = response.data;
+            })
+        .catch((error) => {
+            console.error("Error fetching data:", error);
+            });
+        },
+    },
+        async mounted() {
+        this.fetchProducts();
+    },
+};
 </script>
 
 <style scoped>

@@ -1,19 +1,32 @@
 <template>
-    <div :style = "{backgroundColor: bgcolor}" class="category">
-        <img :src="imgSrc" :alt="title" class="category-img" />
-        <h3>{{ title }}</h3>
-        <p> {{ items }} items </p>
+    <div 
+    @mouseover="isHovered = true"
+    @mouseleave="isHovered = false"
+    :style = "{
+            hoverStyles, 
+            backgroundColor: color, 
+            border: isHovered ? `2px solid gray` : ''
+            }" 
+    class="category">
+        <img :src="image" :alt="name" class="category-img" />
+        <h3>{{ name }}</h3>
+        <p> {{ productCount }} Items </p>
     </div>
 </template>
 
 <script>
     export default{
         props: {
-            title: String,
-            items: Number,
-            imgSrc: String,
-            bgcolor: String,
+            name: String,
+            productCount: Number,
+            image: String,
+            color: String,
         },
+    data() {
+        return {
+            isHovered: false,
+        };
+    },
     };
 </script>
 
@@ -30,6 +43,8 @@
     background-color: #f0f2f5;
     border-radius: 10px;
     margin: 10px;
+    cursor: pointer;
+    transition: all 0.3 ease;
 }
 
 .category p {

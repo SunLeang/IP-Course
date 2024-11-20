@@ -1,11 +1,22 @@
 <template>
-    <div :style="{backgroundColor: bgcolor}" class="promotion">
+    <div class="promotion" 
+    @mouseover="isHovered = true"
+    @mouseleave="isHovered = false"
+    :style="{
+        hoverStyles,
+        backgroundColor: color,
+        border: isHovered ? `2px solid blue` : '',
+    }">
         <div class="Banners">
             <h2>{{ title }}</h2>
-            <buttons :bgBtncolor="bgBtncolor" :label="label" @click="HandleClick" />
+            <Buttons 
+                :buttonColor="buttonColor" 
+                :label="'Shop Now'" 
+                @click="HandleClick" 
+            />
         </div>
         <div class="banner-img">
-            <img :src="imgSrc" :alt="title" class="banner-image">
+            <img :src="image" :alt="title" class="banner-image">
         </div>
     </div>
 </template>
@@ -20,15 +31,20 @@ import Buttons from './Buttons.vue';
 
         props: {
             title: String,
-            label: String,
-            imgSrc: String,
-            bgcolor: String,
-            bgBtncolor: String,
+            url: String,
+            image: String,
+            color: String,
+            buttonColor: String,
         },
 
         methods: {
             HandleClick() {
                 alert("Let's shop: " + this.title);
+            }
+        },
+        data(){
+            return{
+                isHovered : false,
             }
         },
     };
@@ -46,6 +62,7 @@ import Buttons from './Buttons.vue';
     background-color: #f9f9f9;
     border-radius: 8px;
     margin: 10px;
+    transition: all 0.1s ease-in;
 }
 
 .Banners {
@@ -70,16 +87,16 @@ import Buttons from './Buttons.vue';
 }
 
 button {
-        width: 55%;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        justify-content: center;
-        padding: 8px 16px;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
+    width: 55%;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: center;
+    padding: 8px 16px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
 
 </style>
