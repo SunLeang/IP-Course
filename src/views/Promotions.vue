@@ -1,54 +1,39 @@
 <template>
-    <div class="banner-list">
+    <div class="promotion-list">
         <Promotion
-            v-for="(banner, index) in banners"
+            v-for="(promotion, index) in promotions"
             :key = "index"
-            :title = "banner.title"
-            :image = "banner.image"
-            :color = "banner.color"
-            :buttonColor = "banner.buttonColor"
+            :title = "promotion.title"
+            :image = "promotion.image"
+            :color = "promotion.color"
+            :buttonColor = "promotion.buttonColor"
             :label = "'Shop Now'"
         />
     </div>
 </template>
 
 <script>
-import axios from "axios";
+import { computed, onMounted } from "vue";
+import { useProductStore } from "@/stores/product";
 import Promotion from "@/components/Promotion.vue";
 
 export default {
     components: {
         Promotion
     },
-    data() {
-        return {
-            banners: [],
-        };
-    },
-    methods: {
-        fetchPromotion() {
-            axios
-                .get("http://localhost:3000/api/promotions")
-                .then((response) => {
-                    console.log(response.data);
-                    this.banners = response.data;
-                })
-                .catch((error) => {
-                    console.error("Error fetching data:", error);
-                });
-        },
-    },
+    setup() {
+        const store = useProductStore();
+        
+        const promotions = computed(() => store.promotions);
 
-    async mounted() {
-        this.fetchPromotion();
-    },
+        onMounted(async () => {
+            await store.fetchPromotions();
+            console.log("Promotions in component:", promotions.value); 
+        });
+
+        return {
+            promotions
+        };
+    }
 };
 </script>
-
-<style scoped>
-.banner-list {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-}
-</style>

@@ -8,12 +8,12 @@
         border: isHovered ? `2px solid blue` : '',
     }">
         <div class="Banners">
-            <h2>{{ title }}</h2>
-            <Buttons 
+            <div class="title">{{ title }}</div>
+            <div class = "btn"><Buttons 
                 :buttonColor="buttonColor" 
                 :label="'Shop Now'" 
                 @click="HandleClick" 
-            />
+            /></div>
         </div>
         <div class="banner-img">
             <img :src="image" :alt="title" class="banner-image">
@@ -51,27 +51,28 @@ import Buttons from './Buttons.vue';
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 .promotion {
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 500px;
+    width: 512px;
     height: 300px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    margin: 10px;
-    transition: all 0.1s ease-in;
+    border-radius: 10px;
+    border: 3px solid;
+    margin: .5rem;
+    box-shadow: 10px 5px 15px grey;
 }
 
-.Banners {
-    width: inherit;
-    height: 60%;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    justify-content: space-between;
+.Banners .title {
+    white-space: pre-line;
+    -webkit-text-stroke: .2px black;
+    font-family: "Inter", sans-serif;
+    font-size: 1.6em;
+    font-weight: 700;
+    color: black;
+    margin-inline: 2.5rem;
 }
 
 .banner-img {
@@ -83,20 +84,11 @@ import Buttons from './Buttons.vue';
 .banner-image {
     width: 200px;
     height: 190px;
-    margin-right: 20px;
+    margin-right: 36px;
 }
 
-button {
-    width: 55%;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    justify-content: center;
-    padding: 8px 16px;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+.Banners .btn{
+    margin: 2.5rem;
 }
 
 </style>

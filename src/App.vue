@@ -1,42 +1,57 @@
 <template>
     <div>
-      <categories/>
-      <promotions/>
+      <categories />
+      <promotions />
     </div>
-  <RouterView />
+
 </template>
 
 <script>
-
+import { useProductStore } from './stores/product';
+import { mapState } from 'pinia';
 import Categories from './views/Categories.vue';
 import Promotions from './views/Promotions.vue';
 
+
 export default {
+  setup() {
+    const store = useProductStore()
+    return {
+      store
+    }
+  },
   components: {
     Categories,
     Promotions,
   },
+
+  methods: {
+    getQuantity() {
+      return Math.floor(Math.random() * 100)
+    },
+    
+  },
   data() {
     return {
 
-    };
-  },
-};
-
-</script>
-
-<style scoped>
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  color:black;
   
+  computed: {
+    ...mapState(useProductStore, {
+      popularProducts: 'getPopularProducts',
+            categories(store) {
+                return store.getCategoriesByGroup(this.currentGroupName);
+            },
+      promotions: "promotions",
+      products: "products",
+      groups: "groups",
+    }),
+  },
+
+  async mounted() {
+    await this.store.fetchProducts()
+    await this.store.fetchGroups()
+  }, 
 }
-body{
-  background-color: rgb(198, 198, 198);
-}
-
-</style>
-
-
+  }
+};
+</script>

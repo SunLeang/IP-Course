@@ -9,8 +9,8 @@
             }" 
     class="category">
         <img :src="image" :alt="name" class="category-img" />
-        <h3>{{ name }}</h3>
-        <p> {{ productCount }} Items </p>
+        <div class = "name">{{ name }}</div>
+        <div class = "productCount"> {{ productCount }} Items </div>
     </div>
 </template>
 
@@ -31,24 +31,35 @@
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 .category {
     display: flex;
-
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    width: 140px;
-    padding: 10px;
-    background-color: #f0f2f5;
+    width: 150px;
+    height: 200px;
     border-radius: 10px;
-    margin: 10px;
-    cursor: pointer;
-    transition: all 0.3 ease;
+    border: 3px solid;
+    margin: .5rem;
+    box-shadow: 10px 5px 15px grey;
 }
+.category .name{
+    -webkit-text-stroke: .2px black;
+    color: black;
+    margin-top: 0.1rem;
+    font-family: "Inter", sans-serif;
+    font-style: normal;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-size: 1.1em;
+  }
 
-.category p {
-    color: gray;
+.category .productCount {
+    font-family: "Inter", sans-serif;
+    font-weight: bold;
+    font-size: 1.15em;
+    margin-top: 1.3rem;
 }
 
 .category-img {
