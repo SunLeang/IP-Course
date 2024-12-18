@@ -1,98 +1,129 @@
 <template>
-    <div>
-      <div class="menu_container">
-        <Menu title="Featured Products" :navList="groups"></Menu>
-      </div>
-      <categories />
-      <promotions />
-    </div>
-    <div class="menu_container">
-      <Menu title="Popular Products" :navList="groups" @change-nav="changeProductGroup"></Menu>
-    </div>
-    <div class="popproduct_container">
-    <PopularProduct
-      v-for="prod in productsByGroup"
-      :image="prod.image"
-      :name="prod.name"
-      :rating="prod.rating"
-      :size="prod.size"
-      :price="prod.price"
-      :group="prod.group"
-    ></PopularProduct>
-  </div>
+  <router-view>
+    <div class="main">
+      <Tabbar />
+      <Hero />
 
+      <Menu @categorySelected="filterByCategory" title="Featured Categories" />
+
+      <br />
+      <div class="category">
+        <div v-if="categoriesLoading">Loading Categories...</div>
+        <div v-else style="display: flex; gap: 11px">
+          <div
+            style="display: inline-flex"
+            v-for="category in Categories"
+            :key="category"
+          >
+            <Categories
+              :categoryId="category.id - 1"
+              :title="category.name"
+              :amount="category.productCount"
+              :color="category.color"
+              :image="category.image"
+            />
+          </div>
+        </div>
+      </div>
+
+      <br /><br /><br />
+      <div class="promotion">
+        <div v-if="promotionsLoading">Loading Promotions...</div>
+        <div v-else style="display: flex; gap: 10px">
+          <div v-for="promotion in Promotions" :key="promotion">
+            <Promotion
+              :title="promotion.title"
+              :buttonColor="promotion.buttonColor"
+              :color="promotion.color"
+              :imgURL="promotion.image"
+            />
+          </div>
+        </div>
+      </div>
+
+      <br /><br />
+      <Menu @categorySelected="filterByCategory" title="Popular Products" />
+      <Product />
+    </div>
+  </router-view>
 </template>
 
 <script>
-import { useProductStore } from '../stores/product';
-import { mapState } from 'pinia';
-import Categories from '@/views/Categories.vue';
-import Promotions from '@/views/Promotions.vue';
-import PopularProduct from '../components/PopularProduct.vue';
-import Menu from '../components/Menu.vue';
+import Promotion from '../components/Promotion.vue'
+import Categories from '../components/Categories.vue'
+import { useProductStore } from '../stores/product'
+import { mapState } from 'pinia'
+import Menu from '../components/Menu.vue'
+import Product from '../components/Product.vue'
+import Hero from '@/components/Hero.vue'
 
 export default {
-    name: 'HomeView',
-  setup() {
-    const store = useProductStore()
+  name: 'App',
+  components: { Categories, Promotion, Menu, Product, Hero },
+
+  data() {
     return {
-      store,
-      currentGroupName: "Fruit"
+      currentGroupName: 'Fruits',
+      currentCategoryId: 5,
+      categoriesLoading: false,
+      promotionsLoading: false,
     }
-  },
-  components: {
-    Categories,
-    Promotions,
-    PopularProduct,
-    Menu,
   },
 
-  methods:{
-    changeProductGroup(nav){
-      this.store.currProductGroup = nav;
-    }
-  },
+  methods: {},
 
   computed: {
     ...mapState(useProductStore, {
-      categories: "categories",
-      products: "products",
-      groups: "groups", 
-      promotions: "promotions",
-      popProducts: "getPopularProducts",
+      Categories: 'categories',
+      Promotions: 'promotions',
+      Products: 'products',
+      Groups: 'groups',
+
       categoriesByGroup(store) {
-        return store.getCategoriesByGroup(this.currentGroupName);
+        const filteredCategories = store.getCategoriesByGroup(
+          this.currentGroupName,
+        )
+        console.log('Categories byGroupName: ', filteredCategories)
+        return filteredCategories
       },
+
       productsByGroup(store) {
-        return store.getProductsByGroup();  
+        const filteredProducts = store.getProductsByGroup(this.currentGroupName)
+        console.log('Products byGroupName: ', filteredProducts)
+        return filteredProducts
       },
+
       productsByCategory(store) {
-        return store.getProductsByCategory(this.currentGroupName);
+        const filteredProducts = store.getProductsByCategory(
+          this.currentCategoryId,
+        )
+        console.log('Products byCategoryId: ', filteredProducts)
+        return filteredProducts
+      },
+
+      popularProducts(store) {
+        // const popularProducts = store.products.filter((product) => product.countSold > 10)
+        const popularProducts = store.getPopularProducts
+        console.log('Popular Products: ', popularProducts)
+        return popularProducts
       },
     }),
   },
-
-  async mounted() {
-    // fetch data from backend
-    await this.store.fetchCategories();
-    await this.store.fetchPromotions();
-    await this.store.fetchProducts();
-    await this.store.fetchGroup();
-    
-    console.log("Categories:", this.store.categories);
-    console.log("Products:", this.store.products);
-    console.log("Groups:", this.store.groups);
-  },
 }
-  
 </script>
 
 <style>
-.popproduct_container {
+.main {
+  display: block;
+  margin: 0px 50px 0px 50px;
+}
+
+.category {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  width: auto;
+}
+
+.promotion {
+  display: flex;
+  gap: 25px;
 }
 </style>

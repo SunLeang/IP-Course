@@ -1,0 +1,18 @@
+.category-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100vw;
+}
+.category-img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  margin-bottom: 8px;
+}
+
+.promotion-list{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

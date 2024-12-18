@@ -1,84 +1,85 @@
 <template>
-    <div class="menu">
-        <h1 class="quicksand-regular">{{ title }}</h1>
-        <div class="navs">
-            <p @click="setCurrNav('All')">All</p>
-            <template v-for="nav in navList">
-                <p @click.prevent="setCurrNav(nav)" :class="[activeTab === nav ? 'Inter-bold' : 'Inter-regular']">
-                    {{nav}}
-                </p>
-            </template>
-        </div>
+  <div class="featured-categories">
+    <h2 class="title">{{ title }}</h2>
+    <div class="categories">
+      <button
+        v-for="(category, index) in categories"
+        :key="index"
+        :class="{ active: selectedCategory === category }"
+        @click="selectCategory(category)"
+      >
+        {{ category }}
+      </button>
     </div>
-    </template>
-    <script>
-    import { useProductStore } from '@/stores/product';
-    export default {
-        setup() {
-            const store = useProductStore()
-            return {
-                store
-            }
-        },
-        props: {
-            navList: Array,
-            title: String,
-        },
-        data() {
-            return {
-                activeTab: "All",
-                navs: this.navList
-            }
-        },
-        methods: {
-            setCurrNav(nav) {
-                this.activeTab = nav
-                this.$emit("change-nav", nav)
-            }
-        },
-        computed: {
-            coolList() {
-                const newList = [...this.navs]
-                newList.unshift("All")
-                return newList
-            }
-        },
+  </div>
+</template>
+
+<script>
+export default {
+  props: ['title'],
+  data() {
+    return {
+      categories: [
+        'All',
+        'Milks & Dairies',
+        'Coffees & Teas',
+        'Pet Foods',
+        'Meats',
+        'Vegetables',
+        'Fruits',
+      ],
+      selectedCategory: 'All',
     }
-    </script>
-    <style scoped>
-    /* Lato font */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-    /* Quicksand font */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-    /* Montserat */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-    .quicksand-regular {
-        font-family: "Inter", sans-serif;
-        font-optical-sizing: auto;
-        font-weight: 700;
-        font-style: normal;
-    }
-    .Inter-bold {
-        font-family: "Inter", sans-serif;
-        font-weight: 900;
-        font-style: normal;
-    }
-    .Inter-regular {
-        font-family: "Inter", sans-serif;
-        font-weight: 400;
-        font-style: normal;
-    }
-    .menu {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 16px 0 16px;
-    }
-    .menu > .navs {
-        display: flex;
-        column-gap: 20px;
-    }
-    .navs > p {
-        cursor: pointer;
-    }
-    </style>
+  },
+  methods: {
+    selectCategory(category) {
+      this.selectedCategory = category
+      this.$emit('categorySelected', category)
+    },
+  },
+}
+</script>
+
+<style scoped>
+.featured-categories {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border-bottom: 1px solid #ddd;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.categories {
+  display: flex;
+  gap: 16px;
+}
+
+button {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: #333;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition:
+    color 0.3s,
+    background-color 0.3s;
+}
+
+button:hover {
+  color: #007bff;
+}
+
+button.active {
+  font-weight: bold;
+  color: white;
+  background-color: #007bff;
+}
+</style>
