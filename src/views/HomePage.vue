@@ -11,7 +11,7 @@
                 </template>
             </section>
             <div class="space">
-                <img src="../assets/images/moon1.png">
+                <img src="../assets/images/moon.png">
             </div>
         </div>
         <div class="article">
@@ -63,7 +63,7 @@ export default {
     justify-content:space-between;
     align-items: center;
     border: 1px solid black;
-    background-color: #F4EDD3;
+    background-color: #f4d3f2;
     font-family: "Roboto Mono", serif;
 }
 .menu-sec {
