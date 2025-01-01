@@ -62,10 +62,10 @@ export default {
   align-items: center;
   padding: 50px;
   color: white;
-  border: 1px solid #4C585B;
+  border: 1px solid #a832a8;
   border-bottom: none;
   border-radius: 10px 10px 0px 0px;
-  background-color: #4C585B;
+  background: linear-gradient(to right, #a832a8, #6b006b);
 }
 .link {
   display: flex;
@@ -75,7 +75,7 @@ export default {
   padding: 10px;
   border: none;
   color: white;
-  background-color: #4C585B;
+  background: linear-gradient(to right, #a832a8, #6b006b);
 }
 span {
   font-size: 20px;
@@ -92,7 +92,7 @@ a {
 }
 
 a.router-link-active {
-  color:black; 
+  color:#a832a8; 
   font-weight: bolder;
   
 }

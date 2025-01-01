@@ -10,9 +10,9 @@
 .footer {
     display: flex;
     justify-content: center;
-    border: 1px solid black;
+    border: 1px solid #a832a8;
     border-top: none;
-    background-color: #4C585B;
+    background: linear-gradient(to right, #a832a8, #6b006b);
     border-radius: 0px 0px 10px 10px;
 }
 .footer-sec {

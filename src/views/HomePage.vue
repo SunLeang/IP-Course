@@ -62,22 +62,22 @@ export default {
     display: flex;
     justify-content:space-between;
     align-items: center;
-    border: 1px solid black;
-    background-color: #f4d3f2;
+    border: 1px solid #a832a8;
+    background: linear-gradient(to bottom, #f4d3f2, #e0b0e0);
     font-family: "Roboto Mono", serif;
 }
 .menu-sec {
     display: flex;
     flex-direction: column;
     width: 20%;
-    border: 1px solid black;
+    border: 1px solid #a832a8;
     border-left: none;
     border-top: none;
     border-bottom: none;
 }
 .menu-sec .menu {
     padding: 30px 0px 30px 40px;
-    border: 1px solid black;
+    border: 1px solid #a832a8;
     border-top: none;
     border-left: none;
     border-right: none;
@@ -98,7 +98,7 @@ export default {
     font-weight: 500;
     padding: 30px;
     font-size: 18px;
-    border: 1px solid black;
+    border: 1px solid #a832a8;
     border-left: none;
     border-right: none;
     border-top: none;
@@ -106,7 +106,7 @@ export default {
 }
 
 .section a.router-link-active {
-    background-color: #4C585B;
+    background: linear-gradient(to right, #a832a8, #6b006b);
     color: white;
 }
 

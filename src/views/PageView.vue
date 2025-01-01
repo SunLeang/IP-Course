@@ -70,6 +70,6 @@ export default {
 }
 hr.new2 {
   width: 30vw;
-  border-top: 2px dashed black;
+  border-top: 2px dashed #a832a8;
 }
 </style>
