@@ -124,8 +124,9 @@ export default {
     height: 20vh;
 }
 .space > img {
-    height: 150px;
-    width: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
 }
 .input-type {
     display: flex;
