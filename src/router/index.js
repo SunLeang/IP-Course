@@ -5,7 +5,7 @@ import Section from '@/views/Section.vue';
 
 
 const router = createRouter({
-  history: createWebHistory(), // Use browser history
+  history: createWebHistory(),
   routes: [
     {
       path: '/',
@@ -14,7 +14,7 @@ const router = createRouter({
       component: HomePage,
       children: [
         {
-          path: '/page/:pageNumber',
+          path: 'page/:pageNumber',
           component: Page,
           children: [
             {

@@ -15,43 +15,42 @@
 import { useMessageStore } from '@/stores/Page';
 
 export default {
-  setup() {
-      const store = useMessageStore()
-      return {
-          store,
-      }
-  },
-  computed: {
-      curPage() {
-          return this.$route.params.pageNumber
-      },
-      curSec() {
-          return this.$route.params.secNumber
-      },
-      getMessage() {
-          const fromPage = this.store.lastPage;
-          const message = this.store.pages[fromPage];
-          if(message) {
-              return message;
-          }
-          return "";
-      },
+    setup() {
+        const store = useMessageStore()
+        return {
+            store,
+        }
+    },
+    computed: {
+        curPage() {
+            return this.$route.params.pageNumber
+        },
+        curSec() {
+            return this.$route.params.secNumber
+        },
+        getMessage() {
+            const fromPage = this.store.lastPage;
+            const message = this.store.pages[fromPage];
+            if(message) {
+                return message;
+            }
+            return "";
+        },
 
-      haveMessage() {
-          const fromPage = this.store.lastPage;
-          const fromSec = this.store.lastSec;
+        haveMessage() {
+            const fromPage = this.store.lastPage;
 
-          if(this.$route.params.pageNumber === fromPage && this.$route.params.secNumber === fromSec) {
-              return false;
-          }
+            if(this.$route.params.pageNumber === fromPage) {
+                return false;
+            }
 
-          if(this.store.pages[`${fromPage}-${fromSec}`]) {
-              return true;
-          }
+            if(this.store.pages[fromPage]) {
+                return true;
+            }
 
-          return false;
-      }
-  }
+            return false;
+        }
+    }
 }
 </script>
 

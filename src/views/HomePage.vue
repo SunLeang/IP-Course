@@ -13,9 +13,6 @@
             <div class="space">
                 <img src="../assets/images/moon.png">
             </div>
-            <div class="background-image">
-                <img src="../assets/images/moon2.png">
-            </div>
         </div>
         <div class="article">
             <RouterView />
@@ -125,11 +122,13 @@ export default {
     align-items: center;
     justify-content: center;
     height: 20vh;
+    width: 100%; 
 }
+
 .space > img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: fill;
+    width: 100%; /* full width of the container */
+    height: 100%; /* full height of the container */
+    object-fit: cover; /* covers the entire space, maintaining aspect ratio */
 }
 .background-image {
     position: absolute;
