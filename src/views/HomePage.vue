@@ -14,7 +14,7 @@
                 <img src="../assets/images/moon.png">
             </div>
             <div class="background-image">
-                <img src="../assets/images/cyberpunk.png">
+                <img src="../assets/images/moon2.png">
             </div>
         </div>
         <div class="article">
