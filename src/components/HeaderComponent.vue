@@ -1,68 +1,99 @@
 <template>
-  <div class="header-container">
-    <button>Home</button>    
-    <div class="usernav">
-      <router-link
-        v-for="page in pages"
-        :key="page.id"
-        :to="`/${page.id}`"
-        class="link-button"
-      >
-        <button>{{ page.name }}</button>
-      </router-link>
-    </div>
-  </div>
+  <header>
+      <div class="header">
+          <span>Header</span>
+          <div class="link">
+              <button v-for="page in pages" :key="page.name">
+                  <router-link 
+                      @click="passMessage()"
+                      :to="page.link">
+                      {{ page.name }}
+                  </router-link>
+              </button>
+          </div>
+      </div>
+  </header>
 </template>
 
 <script>
+import { useMessageStore } from '@/stores/Page';
+
 export default {
-  data() {
-    return {
-      pages: [
-        { id: 'page1', name: 'Page 1' },
-        { id: 'page2', name: 'Page 2' },
-        { id: 'page3', name: 'Page 3' },
-      ],
-    };
+  name: "DynamicHeader",
+  setup() {
+      const store = useMessageStore()
+      return {
+          store,
+      }
   },
+  data() {
+      return {
+          pages: [
+              { name: "Page1", link: "/page/1" },
+              { name: "Page2", link: "/page/2" },
+              { name: "Page3", link: "/page/3" },
+          ],
+          message: "",
+      };
+  },
+  methods: {
+      passMessage() {
+          console.log("hello")
+          this.store.lastPage = this.curPage;
+          this.store.pages[this.curPage] = this.store.message; 
+          this.store.message = ""; 
+      },
+  },
+  computed: {
+      curPage() {
+          return this.$route.params.pageNumber
+      }
+  }
+
 };
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Quattrocento+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Quicksand:wght@300..700&family=Rajdhani:wght@300;400;500;600;700&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto+Flex:opsz,wght@8..144,100..1000&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap');
 
-.header-container {
+.header {
   display: flex;
-  flex-direction: row;
-  width: auto;
   justify-content: space-between;
-  border: 1px solid black;
-  margin: 0;
-  padding: 1rem;
+  align-items: center;
+  padding: 50px;
+  color: white;
+  border: 1px solid #4C585B;
+  border-bottom: none;
+  border-radius: 10px 10px 0px 0px;
+  background-color: #4C585B;
 }
-
-.header-container > button {
-  font-family: 'Inter', sans-serif;
-  font-size: 20px;
-  border: none;
-  background-color: transparent;
-}
-
-.usernav {
+.link {
   display: flex;
-  flex-direction: row;
-  gap: 1rem;
+  gap: 20px;
 }
-
-.link-button {
-  text-decoration: none;
-}
-
-.link-button button {
-  font-family: 'Inter', sans-serif;
-  font-size: 20px;
+.link button {
+  padding: 10px;
   border: none;
-  background-color: transparent;
-  cursor: pointer;
+  color: white;
+  background-color: #4C585B;
+}
+span {
+  font-size: 20px;
+  font-weight: 600;
+  font-family: "Roboto Mono", serif;
+}
+a {
+  font-family: "Roboto Mono", serif;
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  transition-duration: 0.2s;
+}
+
+a.router-link-active {
+  color:black; 
+  font-weight: bolder;
+  
 }
 </style>
