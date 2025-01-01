@@ -13,6 +13,9 @@
             <div class="space">
                 <img src="../assets/images/moon.png">
             </div>
+            <div class="background-image">
+                <img src="../assets/images/cyberpunk.png">
+            </div>
         </div>
         <div class="article">
             <RouterView />
@@ -127,6 +130,21 @@ export default {
     max-width: 100%;
     max-height: 100%;
     object-fit: fill;
+}
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.3;
+    pointer-events: none;
+}
+.background-image > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 .input-type {
     display: flex;
