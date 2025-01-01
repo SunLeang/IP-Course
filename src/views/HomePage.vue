@@ -126,7 +126,7 @@ export default {
 .space > img {
     max-width: 100%;
     max-height: 100%;
-    object-fit: contain;
+    object-fit: fill;
 }
 .input-type {
     display: flex;
