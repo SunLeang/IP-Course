@@ -18,13 +18,13 @@ const router = createRouter({
           component: Page,
           children: [
             {
-              path: '/section/:sectionNumber',
+              path: 'section/:sectionNumber',
               component: Section,
             }
           ],
         },
       ],
-    },
+    }
   ],
 });
 
