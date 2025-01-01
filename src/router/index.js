@@ -1,16 +1,31 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Page from '@/views/PageView.vue';
+import HomePage from '@/views/HomePage.vue';
+import Section from '@/views/Section.vue';
 
-const routes = [
-  {
-    path: '/:pageNumber',
-    component: Page,
-  },
-];
 
 const router = createRouter({
   history: createWebHistory(), // Use browser history
-  routes,
+  routes: [
+    {
+      path: '/',
+      name: 'home',
+      redirect: "/page/1",
+      component: HomePage,
+      children: [
+        {
+          path: '/page/:pageNumber',
+          component: Page,
+          children: [
+            {
+              path: '/section/:sectionNumber',
+              component: Section,
+            }
+          ],
+        },
+      ],
+    },
+  ],
 });
 
 export default router;
