@@ -40,13 +40,17 @@ export default {
       passMessage() {
           console.log("hello")
           this.store.lastPage = this.curPage;
-          this.store.pages[this.curPage] = this.store.message; 
-          this.store.message = ""; 
+          this.store.lastSec = this.curSec;
+          this.store.pages[`${this.curPage}-${this.curSec}`] = this.store.message;
+          this.store.message = "";
       },
   },
   computed: {
       curPage() {
           return this.$route.params.pageNumber
+      },
+      curSec() {
+          return this.$route.params.secNumber
       }
   }
 

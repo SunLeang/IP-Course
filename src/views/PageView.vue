@@ -39,12 +39,13 @@ export default {
 
       haveMessage() {
           const fromPage = this.store.lastPage;
+          const fromSec = this.store.lastSec;
 
-          if(this.$route.params.pageNumber === fromPage) {
+          if(this.$route.params.pageNumber === fromPage && this.$route.params.secNumber === fromSec) {
               return false;
           }
 
-          if(this.store.pages[fromPage]) {
+          if(this.store.pages[`${fromPage}-${fromSec}`]) {
               return true;
           }
 
