@@ -11,7 +11,7 @@
                 </template>
             </section>
             <div class="space">
-                <img src="../assets/images/robot-amico.png">
+                <img src="../assets/images/moon1.png">
             </div>
         </div>
         <div class="article">
